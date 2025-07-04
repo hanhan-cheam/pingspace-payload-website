@@ -26,6 +26,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
+import { ContentWithMedia } from '@/blocks/ContentWithMedia/config'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -60,6 +61,7 @@ export const Posts: CollectionConfig<'posts'> = {
         return path
       },
     },
+
     preview: (data, { req }) =>
       generatePreviewPath({
         slug: typeof data?.slug === 'string' ? data.slug : '',
@@ -69,6 +71,18 @@ export const Posts: CollectionConfig<'posts'> = {
     useAsTitle: 'title',
   },
   fields: [
+    {
+      type: 'blocks',
+      blocks: [ContentWithMedia],
+      name: 'blockTest',
+      label: false,
+      labels: {
+        singular: 'Content with Media Block',
+        plural: 'Content with Media Blocks',
+      },
+      minRows: 1,
+      maxRows: 1,
+    },
     {
       name: 'title',
       type: 'text',
@@ -160,6 +174,20 @@ export const Posts: CollectionConfig<'posts'> = {
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
+            {
+              name: 'imageCornerStyle', // <-- new field
+              type: 'select',
+              label: 'Image Corner Style',
+              defaultValue: 'rounded-xl',
+              options: [
+                { label: 'None', value: '' },
+                { label: 'Small', value: 'rounded-sm' },
+                { label: 'Medium', value: 'rounded-md' },
+                { label: 'Large', value: 'rounded-lg' },
+                { label: 'Extra Large', value: 'rounded-xl' },
+                { label: 'Full', value: 'rounded-full' },
+              ],
+            },
           ],
         },
       ],

@@ -7,7 +7,7 @@ import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 import { CMSLink } from '../../components/Link'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
-  const { columns } = props
+  const { columns, center } = props
 
   const colsSpanClasses = {
     full: '12',
@@ -16,8 +16,10 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     twoThirds: '8',
   }
 
+  // console.log('center', center)
+
   return (
-    <div className="container my-16">
+    <div className={cn(`container my-16`, center ? 'text-center' : '')}>
       <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
         {columns &&
           columns.length > 0 &&

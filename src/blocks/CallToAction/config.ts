@@ -34,6 +34,24 @@ export const CallToAction: Block = {
         maxRows: 2,
       },
     }),
+    {
+      name: 'bgColor',
+      type: 'radio',
+      options: [
+        {
+          label: 'Transparent',
+          value: 'transparent',
+        },
+        {
+          label: 'Red',
+          value: 'red',
+        },
+        {
+          label: 'Amber',
+          value: 'amber',
+        },
+      ],
+    },
   ],
   labels: {
     plural: 'Calls to Action',

@@ -87,6 +87,35 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       label: 'Custom URL',
       required: true,
     },
+    {
+      name: 'color',
+      type: 'select', // or 'radio' if you prefer buttons
+      options: [
+        {
+          label: 'Primary',
+          value: 'primary',
+        },
+        {
+          label: 'Secondary',
+          value: 'secondary',
+        },
+        {
+          label: 'White',
+          value: 'white',
+        },
+        {
+          label: 'Black',
+          value: 'black',
+        },
+        {
+          label: 'Danger',
+          value: 'danger',
+        },
+        // Add more as needed
+      ],
+      defaultValue: 'primary',
+      required: true,
+    },
   ]
 
   if (!disableLabel) {

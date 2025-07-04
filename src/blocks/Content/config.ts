@@ -75,5 +75,9 @@ export const Content: Block = {
       },
       fields: columnFields,
     },
+    {
+      name: 'center',
+      type: 'checkbox',
+    },
   ],
 }

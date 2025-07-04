@@ -7,6 +7,9 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { SplitContentBlock } from '@/blocks/SplitContent/Component'
+import { GridContentBlock } from '@/blocks/GridContent/GridContent'
+import { DialogContent } from '@/blocks/DialogContent/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -14,6 +17,9 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  splitContent: SplitContentBlock, // 👈 Add this
+  gridContent: GridContentBlock, // 👈 Add this
+  dialogContent: DialogContent, // 👈 Add this
 }
 
 export const RenderBlocks: React.FC<{

@@ -149,8 +149,23 @@ export interface Page {
   id: number;
   title: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'pingspaceDefault';
     richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    richText2?: {
       root: {
         type: string;
         children: {
@@ -180,6 +195,7 @@ export interface Page {
                   value: number | Post;
                 } | null);
             url?: string | null;
+            color: 'primary' | 'secondary' | 'white' | 'black' | 'danger';
             label: string;
             /**
              * Choose how the link should be rendered.
@@ -191,7 +207,114 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | {
+        section1Content: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        section2Content: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        section3Content: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'splitContent';
+      }
+    | {
+        title: string;
+        items?:
+          | {
+              content?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              image?: (number | null) | Media;
+              swapLeftRight?: boolean | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'gridContent';
+      }
+    | {
+        title?: string | null;
+        openOnLaunch?: boolean | null;
+        media: number | Media;
+        rightCardContent?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'dialogContent';
+      }
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -213,6 +336,30 @@ export interface Page {
  */
 export interface Post {
   id: number;
+  blockTest?:
+    | {
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        textPosition?: ('Left' | 'Right') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contentWithMedia';
+      }[]
+    | null;
   title: string;
   heroImage?: (number | null) | Media;
   content: {
@@ -239,6 +386,7 @@ export interface Post {
      */
     image?: (number | null) | Media;
     description?: string | null;
+    imageCornerStyle?: ('' | 'rounded-sm' | 'rounded-md' | 'rounded-lg' | 'rounded-xl' | 'rounded-full') | null;
   };
   publishedAt?: string | null;
   authors?: (number | User)[] | null;
@@ -420,6 +568,7 @@ export interface CallToActionBlock {
                 value: number | Post;
               } | null);
           url?: string | null;
+          color: 'primary' | 'secondary' | 'white' | 'black' | 'danger';
           label: string;
           /**
            * Choose how the link should be rendered.
@@ -429,6 +578,7 @@ export interface CallToActionBlock {
         id?: string | null;
       }[]
     | null;
+  bgColor?: ('transparent' | 'red' | 'amber') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
@@ -470,6 +620,7 @@ export interface ContentBlock {
                 value: number | Post;
               } | null);
           url?: string | null;
+          color: 'primary' | 'secondary' | 'white' | 'black' | 'danger';
           label: string;
           /**
            * Choose how the link should be rendered.
@@ -479,6 +630,7 @@ export interface ContentBlock {
         id?: string | null;
       }[]
     | null;
+  center?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
@@ -993,6 +1145,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         type?: T;
         richText?: T;
+        richText2?: T;
         links?:
           | T
           | {
@@ -1003,6 +1156,7 @@ export interface PagesSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
+                    color?: T;
                     label?: T;
                     appearance?: T;
                   };
@@ -1018,6 +1172,40 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        splitContent?:
+          | T
+          | {
+              section1Content?: T;
+              section2Content?: T;
+              section3Content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        gridContent?:
+          | T
+          | {
+              title?: T;
+              items?:
+                | T
+                | {
+                    content?: T;
+                    image?: T;
+                    swapLeftRight?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        dialogContent?:
+          | T
+          | {
+              title?: T;
+              openOnLaunch?: T;
+              media?: T;
+              rightCardContent?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1049,11 +1237,13 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              color?: T;
               label?: T;
               appearance?: T;
             };
         id?: T;
       };
+  bgColor?: T;
   id?: T;
   blockName?: T;
 }
@@ -1075,11 +1265,13 @@ export interface ContentBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              color?: T;
               label?: T;
               appearance?: T;
             };
         id?: T;
       };
+  center?: T;
   id?: T;
   blockName?: T;
 }
@@ -1122,6 +1314,19 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
+  blockTest?:
+    | T
+    | {
+        contentWithMedia?:
+          | T
+          | {
+              content?: T;
+              image?: T;
+              textPosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   title?: T;
   heroImage?: T;
   content?: T;
@@ -1133,6 +1338,7 @@ export interface PostsSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         description?: T;
+        imageCornerStyle?: T;
       };
   publishedAt?: T;
   authors?: T;
@@ -1553,6 +1759,7 @@ export interface Header {
                 value: number | Post;
               } | null);
           url?: string | null;
+          color: 'primary' | 'secondary' | 'white' | 'black' | 'danger';
           label: string;
         };
         id?: string | null;
@@ -1582,6 +1789,7 @@ export interface Footer {
                 value: number | Post;
               } | null);
           url?: string | null;
+          color: 'primary' | 'secondary' | 'white' | 'black' | 'danger';
           label: string;
         };
         id?: string | null;
@@ -1605,6 +1813,7 @@ export interface HeaderSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              color?: T;
               label?: T;
             };
         id?: T;
@@ -1628,6 +1837,7 @@ export interface FooterSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              color?: T;
               label?: T;
             };
         id?: T;

@@ -35,11 +35,26 @@ export const hero: Field = {
           label: 'Low Impact',
           value: 'lowImpact',
         },
+        {
+          label: 'Pingspace Default',
+          value: 'pingspaceDefault',
+        },
       ],
       required: true,
     },
     {
       name: 'richText',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [...rootFeatures, HeadingFeature(), FixedToolbarFeature(), InlineToolbarFeature()]
+        },
+      }),
+      label: false,
+    },
+
+    {
+      name: 'richText2',
       type: 'richText',
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
@@ -53,6 +68,21 @@ export const hero: Field = {
       }),
       label: false,
     },
+    // {
+    //   name: 'richText3',
+    //   type: 'richText',
+    //   editor: lexicalEditor({
+    //     features: ({ rootFeatures }) => {
+    //       return [
+    //         ...rootFeatures,
+    //         HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+    //         FixedToolbarFeature(),
+    //         InlineToolbarFeature(),
+    //       ]
+    //     },
+    //   }),
+    //   label: false,
+    // },
     linkGroup({
       overrides: {
         maxRows: 2,
@@ -62,7 +92,8 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+        condition: (_, { type } = {}) =>
+          ['highImpact', 'mediumImpact', 'pingspaceDefault'].includes(type),
       },
       relationTo: 'media',
       required: true,

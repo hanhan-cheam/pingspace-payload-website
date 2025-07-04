@@ -23,7 +23,7 @@ export const Logo = (props: Props) => {
       fetchPriority={priority}
       decoding="async"
       className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
+      src="https://firebasestorage.googleapis.com/v0/b/bookswap-724f8.appspot.com/o/Pingspace%20Payload%20Website%2Fpingspace-logo-white.png?alt=media&token=288762dc-5c33-41ca-b147-fa5d7c15ed0b"
     />
   )
 }

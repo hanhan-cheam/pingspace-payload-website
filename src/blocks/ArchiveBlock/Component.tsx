@@ -56,7 +56,11 @@ export const ArchiveBlock: React.FC<
     <div className="my-16" id={`block-${id}`}>
       {introContent && (
         <div className="container mb-16">
-          <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />
+          <RichText
+            className="text-brand-midnight-navy w-full max-w-xl text-2xl font-bold sm:text-center sm:text-3xl"
+            data={introContent}
+            enableGutter={false}
+          />
         </div>
       )}
       <CollectionArchive posts={posts} />
